@@ -16,6 +16,7 @@ import javax.inject.Inject
 @ConfigPersistent
 class QuizPresenter @Inject
 constructor(private val mDataManager: DataManager) : BasePresenter<QuizMvpView>() {
+
     var disposable: Disposable? = null
     fun getQuize() {
         if (disposable != null && !(disposable?.isDisposed as Boolean))
@@ -44,5 +45,10 @@ constructor(private val mDataManager: DataManager) : BasePresenter<QuizMvpView>(
                 }, {}, {
                     mvpView?.showTimeOut()
                 })
+    }
+
+     override fun clear() {
+        if (disposable != null)
+            disposable?.dispose()
     }
 }

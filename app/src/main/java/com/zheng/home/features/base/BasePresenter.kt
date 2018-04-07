@@ -36,6 +36,10 @@ open class BasePresenter<T : MvpView> : Presenter<T> {
         mCompositeSubscription.add(subs)
     }
 
+    open fun clear() {
+        mCompositeSubscription.clear()
+    }
+
     private class MvpViewNotAttachedException internal constructor() : RuntimeException("Please call Presenter.attachView(MvpView) before" + " requesting data to the Presenter")
 
 }

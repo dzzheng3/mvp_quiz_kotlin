@@ -16,4 +16,5 @@
     <string name="quiz_time">Quiz Time!</string>
     <string name="please_select_the_correct_answer">Please select the correct answer</string>
     <string name="quiz_title">Quiz</string>
+    <string name="start">Start</string>
 </resources>

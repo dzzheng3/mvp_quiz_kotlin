@@ -161,6 +161,7 @@ class QuizActivity : BaseActivity(), QuizMvpView, ErrorView.ErrorListener, QuizA
 
     override fun onDestroy() {
         super.onDestroy()
+        quizPresenter.clear()
         if (isShowing && dialogBuilder != null) {
             dialogBuilder = null
         }

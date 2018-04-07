@@ -45,4 +45,9 @@ constructor(private val mDataManager: DataManager) : BasePresenter<QuizMvpView>(
                     mvpView?.showTimeOut()
                 })
     }
+
+    fun clear() {
+        if (disposable != null)
+            disposable?.dispose()
+    }
 }

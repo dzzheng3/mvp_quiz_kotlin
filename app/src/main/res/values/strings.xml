@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">MvpStarter</string>
+
+    <string name="dialog_action_ok">OK</string>
+    <!--<string name="dialog_action_cancel">Cancel</string>-->
+    <string name="dialog_error_title">Sorry</string>
+
+    <!-- Error View -->
+    <string name="error_title">Oops</string>
+    <string name="error_message">There was a problem loading the pokemon, please try again!</string>
+    <string name="error_reload">Reload</string>
+    <string name="title_activity_maps_sample">Map</string>
+    <string name="title_activity_welcome">WelcomeActivity</string>
+    <string name="start_quiz">Start Quiz</string>
+    <string name="title_activity_quiz">QuizActivity</string>
+    <string name="quiz_time">Quiz Time!</string>
+    <string name="please_select_the_correct_answer">Please select the correct answer</string>
+</resources>

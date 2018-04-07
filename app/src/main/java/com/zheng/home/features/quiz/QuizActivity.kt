@@ -35,6 +35,8 @@ class QuizActivity : BaseActivity(), QuizMvpView, ErrorView.ErrorListener, QuizA
         activityComponent().inject(this)
         quizPresenter.attachView(this)
         setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = getString(R.string.quiz_title)
         swipe_to_refresh.setProgressBackgroundColorSchemeResource(R.color.primary)
         swipe_to_refresh.setColorSchemeResources(R.color.white)
         swipe_to_refresh.setOnRefreshListener { quizPresenter.getQuize() }

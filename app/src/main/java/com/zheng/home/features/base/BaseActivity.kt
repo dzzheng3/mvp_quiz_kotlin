@@ -13,15 +13,6 @@ import com.zheng.home.injection.module.ActivityModule
 import timber.log.Timber
 import java.util.concurrent.atomic.AtomicLong
 
-/**
- * Abstract activity that every other Activity in this application must implement. It provides the
- * following functionality:
- * - Handles creation of Dagger components and makes sure that instances of
- * ConfigPersistentComponent are kept across configuration changes.
- * - Set up and handles a GoogleApiClient instance that can be used to access the Google sign in
- * api.
- * - Handles signing out when an authentication error event is received.
- */
 abstract class BaseActivity : AppCompatActivity() {
 
     private var mActivityComponent: ActivityComponent? = null

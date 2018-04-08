@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -17,6 +18,8 @@ class QuizAdapter @Inject constructor() : RecyclerView.Adapter<QuizAdapter.QuizV
 
     private var list: List<String>? = null
 
+    private var selectedPosition = -1
+
     init {
         list = emptyList()
     }
@@ -27,6 +30,7 @@ class QuizAdapter @Inject constructor() : RecyclerView.Adapter<QuizAdapter.QuizV
     }
 
     fun setQuizAnswers(list: List<String>) {
+        selectedPosition = -1
         this.list = list
     }
 
@@ -35,6 +39,7 @@ class QuizAdapter @Inject constructor() : RecyclerView.Adapter<QuizAdapter.QuizV
     }
 
     override fun onBindViewHolder(holder: QuizViewHolder?, position: Int) {
+        holder?.cb_answer?.isChecked = selectedPosition == position
         holder?.position = position
         holder?.iv_quiz?.layout(0, 0, 0, 0)
         Glide.with(context).load(list?.get(position))
@@ -45,11 +50,15 @@ class QuizAdapter @Inject constructor() : RecyclerView.Adapter<QuizAdapter.QuizV
 
     open inner class QuizViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var iv_quiz: ImageView? = view.findViewById(R.id.iv_quiz)
+        var cb_answer: CheckBox? = view.findViewById(R.id.cb)
         var position: Int? = null
 
         init {
-
-            view.setOnClickListener({ if (onClickListenr != null) onClickListenr?.clickItem(position as Int) })
+            view.setOnClickListener({
+                if (onClickListenr != null) onClickListenr?.clickItem(position as Int)
+                selectedPosition = position as Int
+                notifyDataSetChanged()
+            })
 
         }
     }
@@ -66,3 +75,11 @@ class QuizAdapter @Inject constructor() : RecyclerView.Adapter<QuizAdapter.QuizV
     }
 
 }
+
+private var String.isSelect: Boolean
+    get() {
+        return isSelect
+    }
+    set(value) {
+        isSelect = value
+    }

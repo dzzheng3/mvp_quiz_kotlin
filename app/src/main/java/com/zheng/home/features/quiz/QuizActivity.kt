@@ -4,6 +4,8 @@ import android.content.DialogInterface
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.widget.GridLayoutManager
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import com.zheng.home.R
 import com.zheng.home.data.model.Quiz
@@ -58,7 +60,7 @@ class QuizActivity : BaseActivity(), QuizMvpView, ErrorView.ErrorListener, QuizA
                 if (userClickPosition == -1)
                     showTimeOut()
                 else
-                    clickItem(userClickPosition)
+                    showResult(userClickPosition)
             }
         } else {
             quizPresenter.getQuize()
@@ -105,32 +107,6 @@ class QuizActivity : BaseActivity(), QuizMvpView, ErrorView.ErrorListener, QuizA
 
     override fun clickItem(answer: Int) {
         userClickPosition = answer
-        if (answer == quizPair?.first) {
-            dialogBuilder?.setMessage("Congratulations! You have selected correct answer! Would you like to try again?")
-            dialogBuilder?.setPositiveButton("Yes",
-                    { dialog, _ ->
-                        quizPresenter.getQuize()
-                        dialog.dismiss()
-                    })
-            dialogBuilder?.setNegativeButton("No",
-                    { dialog, _ ->
-                        dialog.dismiss()
-                        finish()
-                    })
-        } else {
-            dialogBuilder?.setMessage("Nope. You are wrong! Would you like to try again?")
-            dialogBuilder?.setPositiveButton("Yes",
-                    { dialog, _ ->
-                        dialog.dismiss()
-                    })
-            dialogBuilder?.setNegativeButton("No",
-                    { dialog, _ ->
-                        dialog.dismiss()
-                        finish()
-                    })
-        }
-        isShowing = true
-        alertDialog = dialogBuilder?.show()
     }
 
     override fun onDismiss(p0: DialogInterface?) {
@@ -167,5 +143,49 @@ class QuizActivity : BaseActivity(), QuizMvpView, ErrorView.ErrorListener, QuizA
         if (isShowing && dialogBuilder != null) {
             dialogBuilder = null
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_submit -> {
+                showResult(userClickPosition)
+                return true
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun showResult(answer: Int) {
+        if (answer == quizPair?.first) {
+            dialogBuilder?.setMessage("Congratulations! You have selected correct answer! Would you like to try again?")
+            dialogBuilder?.setPositiveButton("Yes",
+                    { dialog, _ ->
+                        quizPresenter.getQuize()
+                        dialog.dismiss()
+                    })
+            dialogBuilder?.setNegativeButton("No",
+                    { dialog, _ ->
+                        dialog.dismiss()
+                        finish()
+                    })
+        } else {
+            dialogBuilder?.setMessage("Nope. You are wrong! Would you like to try again?")
+            dialogBuilder?.setPositiveButton("Yes",
+                    { dialog, _ ->
+                        dialog.dismiss()
+                    })
+            dialogBuilder?.setNegativeButton("No",
+                    { dialog, _ ->
+                        dialog.dismiss()
+                        finish()
+                    })
+        }
+        isShowing = true
+        alertDialog = dialogBuilder?.show()
     }
 }

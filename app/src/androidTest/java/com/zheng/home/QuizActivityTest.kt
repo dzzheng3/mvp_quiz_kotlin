@@ -31,7 +31,7 @@ class QuizActivityTest {
     var chain: TestRule = RuleChain.outerRule(mComponent).around(rule)
 
     @Test
-    fun checkPokemonsDisplay() {
+    fun checkQuizDisplay() {
         stubDataManagerGetResponse(Single.just(Pair(1, Quiz("aa", listOf()))))
         rule.launchActivity(null)
         onView(withText("aa"))

@@ -74,12 +74,9 @@ class QuizAdapter @Inject constructor() : RecyclerView.Adapter<QuizAdapter.QuizV
 
     }
 
-}
+    fun setSelectedItem(userClickPosition: Int) {
+        if (userClickPosition >= 0)
+            selectedPosition = userClickPosition
+    }
 
-private var String.isSelect: Boolean
-    get() {
-        return isSelect
-    }
-    set(value) {
-        isSelect = value
-    }
+}

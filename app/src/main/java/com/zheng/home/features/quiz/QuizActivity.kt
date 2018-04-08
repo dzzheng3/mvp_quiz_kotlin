@@ -56,6 +56,7 @@ class QuizActivity : BaseActivity(), QuizMvpView, ErrorView.ErrorListener, QuizA
             isShowing = savedInstanceState.getBoolean(DIALOG_SHOW)
             userClickPosition = savedInstanceState.getInt(USERCLICK_POSITION)
             showQuiz(quiz, answer)
+            quizAdapter.setSelectedItem(userClickPosition)
             if (userClickPosition != -2 && isShowing) {
                 if (userClickPosition == -1)
                     showTimeOut()
